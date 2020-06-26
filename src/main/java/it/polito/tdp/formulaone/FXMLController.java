@@ -1,8 +1,10 @@
 package it.polito.tdp.formulaone;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
+import it.polito.tdp.formulaone.model.Driver;
 import it.polito.tdp.formulaone.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +25,7 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private ComboBox<?> boxAnno;
+    private ComboBox<Integer> boxAnno;
 
     @FXML
     private TextField textInputK;
@@ -33,12 +35,29 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
-
+    	txtResult.clear();
+    	Integer anno = boxAnno.getValue();
+    	if(anno == null) {
+    		txtResult.appendText("Devi selezionare un anno!\n");
+    		return;
+    	}
+    	model.creaGrafo(anno);
+    	txtResult.appendText(String.format("Grafo creato con %d vertici e %d archi!\n", model.nVertici(), model.nArchi()));
+    	txtResult.appendText(String.format("Driver migliore: %s. Punteggio: %d\n", model.getBest().getSurname(), model.getPunteggio()));
     }
 
     @FXML
     void doTrovaDreamTeam(ActionEvent event) {
-
+    	txtResult.clear();
+    	Integer k;
+    	try {
+    		k = Integer.parseInt(this.textInputK.getText());
+    	} catch(NumberFormatException e) {
+    		txtResult.appendText("Devi inserire un numero!\n");
+    		return;
+    	}
+    	for(Driver d: model.trovaDreamTeam(k))
+    		txtResult.appendText(String.format("%s\n", d.getSurname()));
     }
 
     @FXML
@@ -51,5 +70,10 @@ public class FXMLController {
 
 	public void setModel(Model model) {
 		this.model = model;
+		setBox();
+	}
+
+	private void setBox() {
+		this.boxAnno.getItems().addAll(model.getYears());
 	}
 }

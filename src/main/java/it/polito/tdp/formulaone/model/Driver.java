@@ -6,15 +6,15 @@ public class Driver {
 	
 	private int driverId ;
 	private String driverRef ;
-	private int number ;
+	private Integer number ;
 	private String code ;
 	private String forename ;
 	private String surname ;
 	private LocalDate dob ; // date of birth
 	private String nationality ;
 	private String url ;
-	public Driver(int driverId, String driverRef, int number, String code, String forename, String surname,
-			LocalDate dob, String nationality, String url) {
+	public Driver(int driverId, String driverRef, Integer number, String code, String forename, String surname,
+			String nationality, String url) {
 		super();
 		this.driverId = driverId;
 		this.driverRef = driverRef;
@@ -22,7 +22,7 @@ public class Driver {
 		this.code = code;
 		this.forename = forename;
 		this.surname = surname;
-		this.dob = dob;
+		
 		this.nationality = nationality;
 		this.url = url;
 	}
@@ -38,10 +38,10 @@ public class Driver {
 	public void setDriverRef(String driverRef) {
 		this.driverRef = driverRef;
 	}
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 	public String getCode() {
@@ -79,6 +79,12 @@ public class Driver {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	@Override
+	public String toString() {
+		return "Driver [driverId=" + driverId + ", driverRef=" + driverRef + ", number=" + number + ", code=" + code
+				+ ", forename=" + forename + ", surname=" + surname + ", dob=" + dob + ", nationality=" + nationality
+				+ ", url=" + url + "]";
 	}
 	
 	
